@@ -11,9 +11,9 @@ app = FastAPI()
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
-
+print(os.getenv('MONGO_URI'))
 client = MongoClient()
-client = MongoClient("mongodb+srv://admin:1234@web-scrap.4lwt3mh.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(os.getenv('MONGO_URI'))
 db = client["web-scrap"]
 collection = db["mcx"]
 print("DB Connected!")
