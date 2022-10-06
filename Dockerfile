@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.9-slim
 WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
 RUN /usr/local/bin/python -m pip install --upgrade pip
