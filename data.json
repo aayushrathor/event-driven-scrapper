@@ -1,0 +1,142 @@
+[
+    {
+        "Symbol": "MCX Gold",
+        "Last": "51,929.00",
+        "Change": "+283.00",
+        "Change %": "+0.55%",
+        "Close": "51,646.00",
+        "High": "51,940.00",
+        "Low": "51,803.00",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Gold Mini",
+        "Last": "51,635.00",
+        "Change": "+274.00",
+        "Change %": "+0.53%",
+        "Close": "51,361.00",
+        "High": "51,635.00",
+        "Low": "51,500.00",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Silver",
+        "Last": "61,610.00",
+        "Change": "+843.00",
+        "Change %": "+1.39%",
+        "Close": "60,767.00",
+        "High": "61,635.00",
+        "Low": "61,100.00",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Silver Mini",
+        "Last": "61,920.00",
+        "Change": "+853.00",
+        "Change %": "+1.40%",
+        "Close": "61,067.00",
+        "High": "61,944.00",
+        "Low": "61,500.00",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Silver Micro",
+        "Last": "61,935.00",
+        "Change": "+850.00",
+        "Change %": "+1.39%",
+        "Close": "61,085.00",
+        "High": "61,944.00",
+        "Low": "61,288.00",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Crude Oil",
+        "Last": "7,179.00",
+        "Change": "+14.00",
+        "Change %": "+0.20%",
+        "Close": "7,165.00",
+        "High": "7,187.00",
+        "Low": "7,169.00",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Crude Oil",
+        "Last": "7,179.00",
+        "Change": "+14.00",
+        "Change %": "+0.20%",
+        "Close": "7,165.00",
+        "High": "7,187.00",
+        "Low": "7,169.00",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Natural Gas",
+        "Last": "569.00",
+        "Change": "+2.70",
+        "Change %": "+0.48%",
+        "Close": "566.30",
+        "High": "570.00",
+        "Low": "567.50",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Copper",
+        "Last": "671.40",
+        "Change": "+9.15",
+        "Change %": "+1.38%",
+        "Close": "662.25",
+        "High": "674.70",
+        "Low": "667.35",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Aluminium",
+        "Last": "209.45",
+        "Change": "+2.80",
+        "Change %": "+1.35%",
+        "Close": "206.65",
+        "High": "209.55",
+        "Low": "206.65",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Lead",
+        "Last": "182.15",
+        "Change": "+1.40",
+        "Change %": "+0.77%",
+        "Close": "180.75",
+        "High": "182.60",
+        "Low": "181.35",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Zinc",
+        "Last": "288.00",
+        "Change": "+6.65",
+        "Change %": "+2.36%",
+        "Close": "281.35",
+        "High": "289.00",
+        "Low": "281.30",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "MCX Mentha Oil",
+        "Last": "994.40",
+        "Change": "+4.30",
+        "Change %": "+0.43%",
+        "Close": "990.10",
+        "High": "997.00",
+        "Low": "992.10",
+        "Last Trade": "06-Oct 10:24"
+    },
+    {
+        "Symbol": "Mcx Bullion Index",
+        "Last": "14,495.00",
+        "Change": "+110.00",
+        "Change %": "+0.76%",
+        "Close": "14,385.00",
+        "High": "14,545.00",
+        "Low": "14,436.00",
+        "Last Trade": "06-Oct 10:24"
+    }
+]
