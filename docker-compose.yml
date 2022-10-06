@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web-scrap:
+    build: .
+    environment:
+      - MONGO_URI=${MONGO_URI}
+    volumes:
+      - .:/app
+    command: python3 web-scrap.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
