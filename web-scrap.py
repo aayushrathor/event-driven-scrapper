@@ -6,21 +6,27 @@ import pandas as pd
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi_utils.tasks import repeat_every
 
 app = FastAPI()
 
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
-print(os.getenv('MONGO_URI'))
-client = MongoClient()
-client = MongoClient(os.getenv('MONGO_URI'))
+load_dotenv(join(dirname(__file__), '.env'))
+
+client = MongoClient(os.getenv("MONGO_URI"), connectTimeoutMS=30000)
 db = client["web-scrap"]
 collection = db["mcx"]
-print("DB Connected!")
+if collection is not None:
+    print("DB Connected!")
 
+@app.on_event("startup")
+@repeat_every(seconds=60*60*6, raise_exceptions=True)
 def scrap_table():
-    page = requests.get('https://mcxlive.org/', verify=False, timeout=10)
-    print("MCX page status:", page)
+    try:
+        page = requests.get('https://mcxlive.org/', timeout=30)
+        if page.status_code == 200:
+            print("https://mcxlive.org/ is live ^_^")
+    except Exception as e:
+        print(str(e))
 
     soup = BeautifulSoup(page.content, 'lxml')
     table = soup.find('table', class_='main-table')
@@ -30,35 +36,32 @@ def scrap_table():
         title = i.text
         headers.append(title)
 
-    mydata = pd.DataFrame(columns=headers)
-
+    data_rows = []
     for j in table.find_all('tr')[1:]:
         row_data = j.find_all('td')
-        row = [i.text for i in row_data]
-        
-        if(row != ['']):
-            symbol = row[0].strip()
-            last = row[1].strip()
-            change = row[2].strip()
-            changePer = row[3].strip()
-            close = row[4].strip()
-            high = row[5].strip()
-            low = row[6].strip()
-            lastTrade = row[7].strip()
-        
-        mydata = mydata.append({'Symbol': symbol, 'Last': last, 'Change': change, 'Change %': changePer, 'Close': close, 'High': high, 'Low': low, 'Last Trade': lastTrade}, ignore_index=True)
+        row = [i.text.strip() for i in row_data]
+        if row:
+            data_rows.append(row)
 
-    drop_collection = collection.drop()
-    print("Collection dropped!")
-    
-    ins_collection = collection.insert_many(mydata.to_dict('records'))
-    print("Data inserted in collection!")
+        mydata = pd.DataFrame(data_rows, columns=headers)
 
-scrap_table()
+    data = mydata.to_dict('records')
+    if data:
+        collection.drop()
+        collection.insert_many(data)
+        # update_collection = collection.update_many({}, {"$set": data}, upsert=True)
+        print("Data updated in collection!")
+    else:
+        print("No data found to update!")
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {
+            "name": "web scrapper",
+            "version": "0.1.0",
+            "message": "A stocks based web scrapper build with fastapi and beautifulsoup",
+            "author": "[aayushrathor](https://github.com/aayushrathor)"
+            }
 
 @app.get("/scrap")
 def scrap():
@@ -69,4 +72,4 @@ def scrap():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info", debug=True)
