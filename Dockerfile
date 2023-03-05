@@ -1,8 +1,12 @@
-FROM python:3.9-slim
+FROM python:3.8.9-slim-buster as pythonBuilder
 WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
-RUN /usr/local/bin/python -m pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN apt-get update && apt-get install -y build-essential libxml2-dev libxslt-dev && \
+    pip install --no-cache-dir --user -r requirements.txt
+
+FROM python:3.8.9-slim-buster
+WORKDIR /app
+COPY --from=pythonBuilder /root/.local /root/.local
 COPY . /app
-CMD [ "python3", "web-scrap.py" ]
-EXPOSE 8000
+ENV PATH=/root/.local/bin:$PATH
+CMD [ "uvicorn", "web-scrap:app", "--reload" ]
