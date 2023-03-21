@@ -58,7 +58,7 @@ def scrap_table():
 def read_root():
     return {
             "name": "web scrapper",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "message": "A stocks based web scrapper build with fastapi and beautifulsoup",
             "author": "[aayushrathor](https://github.com/aayushrathor)"
             }

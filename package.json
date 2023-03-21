@@ -1,6 +1,3 @@
 {
-  "name": "event-driven-architecture",
-  "version": "0.1.0",
-  "message": "A stocks based web scrapper build with fastapi and beautifulsoup",
-  "author": "[aayushrathor](https://github.com/aayushrathor)"
+  "version": "0.1.1"
 }
