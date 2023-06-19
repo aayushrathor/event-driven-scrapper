@@ -1,3 +1,12 @@
+# [0.2.0](https://github.com/aayushrathor/event-driven-scrapper/compare/v0.1.2...v0.2.0) (2023-06-19)
+
+
+### Features
+
+* update mongo data collection, drop null data & add version func ([cdf7ec3](https://github.com/aayushrathor/event-driven-scrapper/commit/cdf7ec3c4cff909687ed67570aec6d7d2df641b7))
+
+
+
 ## [0.1.2](https://github.com/aayushrathor/event-driven-scrapper/compare/v0.1.1...v0.1.2) (2023-05-07)
 
 
