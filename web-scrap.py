@@ -1,5 +1,6 @@
 import os
 from os.path import join, dirname
+import json
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -20,7 +21,7 @@ if collection is not None:
 
 @app.on_event("startup")
 @repeat_every(seconds=60*60*6, raise_exceptions=True)
-def scrap_table():
+async def scrap_table():
     try:
         page = requests.get('https://mcxlive.org/', timeout=30)
         if page.status_code == 200:
@@ -43,22 +44,39 @@ def scrap_table():
         if row:
             data_rows.append(row)
 
-        mydata = pd.DataFrame(data_rows, columns=headers)
+        mydata = pd.DataFrame(data_rows, columns=headers).dropna()
 
     data = mydata.to_dict('records')
     if data:
-        collection.drop()
-        collection.insert_many(data)
-        # update_collection = collection.update_many({}, {"$set": data}, upsert=True)
+        for item in data:
+            symbol = item['Symbol']
+            update_data = {
+                    '$set': {
+                        'Last': item['Last'],
+                        'Change': item['Change'],
+                        'Change %': item['Change %'],
+                        'Close': item['Close'],
+                        'High': item['High'],
+                        'Low': item['Low'],
+                        'Last Trade': item['Last Trade']
+                        }
+                    }
+            collection.update_one({'Symbol': symbol}, update_data, upsert=True)
         print("Data updated in collection!")
     else:
         print("No data found to update!")
+
+def get_version():
+    with open('package.json', 'r') as json_file:
+        json_data = json.loads(json_file.read())
+        version = json_data['version']
+        return version
 
 @app.get("/")
 def read_root():
     return {
             "name": "web scrapper",
-            "version": "0.1.1",
+            "version": get_version(),
             "message": "A stocks based web scrapper build with fastapi and beautifulsoup",
             "author": "[aayushrathor](https://github.com/aayushrathor)"
             }
